@@ -18,7 +18,20 @@ RUN unzip /tmp/bepipred3.zip -d / && rm -f /tmp/bepipred3.zip
 
 RUN python3 -m venv /venv
 ENV PATH="/venv/bin:$PATH"
-COPY requirements.txt /tmp/requirements.txt
+
+RUN printf "fair-esm==1.0.3\n\
+importlib-resources==5.8.0\n\
+numpy==1.26.4\n\
+pandas==1.4.3\n\
+plotly==5.8.0\n\
+python-dateutil==2.8.2\n\
+pytz==2022.1\n\
+six==1.16.0\n\
+tenacity==8.0.1\n\
+torch==2.2.2\n\
+typing-extensions>=4.8.0\n\
+zipp==3.8.0\n" > /tmp/requirements.txt
+
 RUN pip install --no-cache-dir -r /tmp/requirements.txt && rm -f /tmp/requirements.txt
 
 ENV PATH=/usr/local/cuda/bin:$PATH
